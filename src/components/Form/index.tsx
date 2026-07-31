@@ -13,7 +13,7 @@ import FormRadio from '@/components/Form/FormRadio';
 import CustomButton, {
   type ICustomButtonProps,
 } from '@/components/Base/CustomButton';
-import FormDatepicker from '@/components/Form/FormDatepicker';
+import FormDatepicker from './FormDatePicker';
 import FormMobile from './FormMobile';
 
 interface IFormProps {

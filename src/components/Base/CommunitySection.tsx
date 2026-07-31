@@ -1,4 +1,3 @@
-import { ArrowRight } from "lucide-react";
 import {motion} from "framer-motion";
 import { useTheme } from "@/context/ThemeContext";
 import Home from '@/assets/Home-img.jpg'

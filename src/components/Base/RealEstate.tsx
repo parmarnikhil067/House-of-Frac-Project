@@ -1,4 +1,3 @@
-import { Plus, HandCoins } from "lucide-react";
 import { motion, useInView, animate } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useTheme } from "@/context/ThemeContext";

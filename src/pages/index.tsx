@@ -15,7 +15,7 @@ const Dashboard = lazy(() => import('./Private/Dashboard'));
 const NotFound = lazy(() => import('./Public/NotFound'));
 const Profile = lazy(() => import('./Private/Profile'));
 const Setting = lazy(() => import('./Private/Setting'));
-const Landing = lazy(() => import('./Public/Landing'));
+// const Landing = lazy(() => import('./Public/Landing'));
 const About = lazy(() => import('./Public/About'));
 const PrivacyPolicy = lazy(() => import('./Public/PrivacyPolicy'));
 const TermsAndCondition = lazy(() => import('./Public/TermsAndCondition'));

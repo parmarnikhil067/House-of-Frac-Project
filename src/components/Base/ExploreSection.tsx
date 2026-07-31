@@ -5,21 +5,6 @@ import { useTheme } from "@/context/ThemeContext";
 
 import buildingImg from "@/assets/cta-building.webp"; // Replace with your building image
 
-const fadeUp = {
-  hidden: {
-    opacity: 0,
-    y: 60,
-  },
-  visible: (delay = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.8,
-      delay,
-      ease: "easeOut",
-    },
-  }),
-};
 
 const imageVariant = {
   hidden: {

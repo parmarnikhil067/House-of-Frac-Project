@@ -2,11 +2,12 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Explorebg from '@/assets/cta-bg.webp'
 import { useTheme } from "@/context/ThemeContext";
+import type { Variants } from "framer-motion";
 
 import buildingImg from "@/assets/cta-building.webp"; // Replace with your building image
 
 
-const imageVariant = {
+const imageVariant : Variants = {
   hidden: {
     opacity: 0,
     x: 140,
@@ -18,7 +19,7 @@ const imageVariant = {
     scale: 1,
     transition: {
       duration: 1.2,
-      ease: "easeOut",
+      ease: "linear",
     },
   },
 };

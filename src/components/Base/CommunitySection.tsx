@@ -1,4 +1,5 @@
 import {motion} from "framer-motion";
+import type { Variants } from "framer-motion";
 import { useTheme } from "@/context/ThemeContext";
 import Home from '@/assets/Home-img.jpg'
 import Mall from '@/assets/Mall-img.jpg'
@@ -37,7 +38,8 @@ const assets = [
 
 const CommunitySection = () => {
   const {darkMode}  = useTheme();
-  const fadeUp = {
+
+  const fadeUp : Variants = {
   hidden: {
     opacity: 0,
     y: 60,
@@ -47,7 +49,7 @@ const CommunitySection = () => {
     y: 0,
     transition: {
       duration: 0.7,
-      ease: "easeOut",
+      ease: "linear",
     },
   },
 };
@@ -61,7 +63,7 @@ const staggerContainer = {
   },
 };
 
-const cardAnimation = {
+const cardAnimation: Variants = {
   hidden: {
     opacity: 0,
     y: 80,
@@ -71,7 +73,7 @@ const cardAnimation = {
     y: 0,
     transition: {
       duration: 0.7,
-      ease: "easeOut",
+      ease: "linear",
     },
   },
 };

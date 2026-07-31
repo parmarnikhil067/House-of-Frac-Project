@@ -1,4 +1,5 @@
 import { motion, useInView, animate } from "framer-motion";
+import type { Variants } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useTheme } from "@/context/ThemeContext";
 
@@ -41,7 +42,7 @@ function CountUp({
   );
 }
 
- const cardVariant = {
+ const cardVariant: Variants = {
   hidden: {
     opacity: 0,
     y: 80,
@@ -52,7 +53,7 @@ function CountUp({
     transition: {
       delay: i * 0.18,
       duration: 0.8,
-      ease: "easeOut",
+      ease: "linear",
     },
   }),
 };

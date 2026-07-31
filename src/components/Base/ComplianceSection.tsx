@@ -1,6 +1,7 @@
 import buildingImg from "@/assets/building-img.webp";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useTheme } from "@/context/ThemeContext";
+import type { Variants } from "framer-motion";
 
 import {
   Building2,
@@ -43,10 +44,7 @@ const cards = [
       "Where applicable, assets are monitored under independent trustee oversight to protect every prospective co-owner.",
   }
 ];
-
-export default function ComplianceSection() {
-  const {darkMode} = useTheme();
-  const fadeUp = {
+  const fadeUp: Variants= {
   hidden: {
     opacity: 0,
     y: 60,
@@ -56,12 +54,12 @@ export default function ComplianceSection() {
     y: 0,
     transition: {
       duration: 0.7,
-      ease: "easeOut",
+      ease: "linear",
     },
   },
 };
 
-const imageAnimation = {
+const imageAnimation: Variants = {
   hidden: {
     opacity: 0,
     y: 120,
@@ -73,10 +71,14 @@ const imageAnimation = {
     scale: 1,
     transition: {
       duration: 1,
-      ease: "easeOut",
+      ease: "linear",
     },
   },
 };
+
+export default function ComplianceSection() {
+  const {darkMode} = useTheme();
+
 
 const mouseX = useMotionValue(0);
 const mouseY = useMotionValue(0);

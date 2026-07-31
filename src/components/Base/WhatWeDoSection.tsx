@@ -1,40 +1,11 @@
 import { motion } from "framer-motion";
+import type { Variants } from "framer-motion";
 import { useTheme } from "@/context/ThemeContext";
 import phoneLeft from "@/assets/phone-left.webp";
 import phoneRight from "@/assets/phone-right.webp";
 
-const features = [
-  {
-    id: "01",
-    title: "Structured Participation",
-    description:
-      "Access real estate opportunities structured through legally defined frameworks—including SPV-based co-ownership models—with clear documentation, defined participation terms, and professional asset presentation from day one.",
-    side: "left",
-  },
-  {
-    id: "02",
-    title: "Verified Assets",
-    description:
-      "Every asset listed on House of Frac undergoes documentation review, financial assessment, legal title verification, and structured preparation before being presented to our registered prospective co-owner base.",
-    side: "left",
-  },
-  {
-    id: "03",
-    title: "Transparent Records",
-    description:
-      "Platform activity, asset documents, prospective co-owner participation details, and distribution records are maintained with full transparency and are accessible through your dedicated prospective co-owner dashboard at any time.",
-    side: "right",
-  },
-  {
-    id: "04",
-    title: "Structured Exit Pathways",
-    description:
-      "Where applicable, House of Frac facilitates structured exit mechanisms, resale opportunities, or buyback arrangements between members—clearly defined in each asset's legal documentation so you always know your options before you commit.",
-    side: "right",
-  },
-];
 
-const fadeUp = {
+const fadeUp : Variants = {
   hidden: {
     opacity: 0,
     y: 80,
@@ -45,7 +16,7 @@ const fadeUp = {
     transition: {
       duration: 0.8,
       delay,
-      ease: "easeOut",
+      ease: "linear",
     },
   }),
 };

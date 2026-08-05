@@ -1,5 +1,4 @@
 import logo from "@/assets/Logo.png";
-import {Link} from "react-router-dom"
 
 import {
   FaFacebookF,
@@ -123,7 +122,7 @@ export default function Footer() {
                 <FaFacebookF />,
               ].map((icon, index) => (
 
-                <Link
+                <button
                   key={index}
                   className="
                     flex
@@ -148,7 +147,7 @@ export default function Footer() {
                   "
                 >
                   {icon}
-                </Link>
+                </button>
 
               ))}
 

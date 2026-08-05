@@ -61,9 +61,7 @@ const inactiveDescription = darkMode
   ? "text-[#7B828C]"
   : "text-[#64748B]";
 
-const loginText = darkMode
-  ? "text-white"
-  : "text-[#0F172A]";
+
 
 const backText = darkMode
   ? "text-white hover:text-[#5B9BF3]"

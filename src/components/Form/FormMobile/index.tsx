@@ -27,7 +27,6 @@ type IFormMobileProps = {
 export default function FormMobile({
   field,
   control,
-  error,
 }: IFormMobileProps) {
 
   const {

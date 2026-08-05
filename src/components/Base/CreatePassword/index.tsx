@@ -115,27 +115,6 @@ const modalText = darkMode ? "text-[#B4B7BD]" : "text-[#64748B]";
 
   // ---------------- Submit ----------------
 
-  const handleSubmit = () => {
-    const otpValue = otp.join("");
-
-    if (otpValue.length !== 6) {
-      setOtpError("Please enter valid OTP.");
-      return;
-    }
-
-    const pass = validatePassword(password);
-    const confirm = validateConfirmPassword(confirmPassword);
-
-    if (!pass || !confirm) return;
-
-    alert("Password Reset Successfully");
-  };
-
-  const isFormValid =
-    otp.join("").length === 6 &&
-    passwordRegex.test(password) &&
-    confirmPassword === password;
-
     const bgColor = darkMode ? "bg-[#0F172A]" : "bg-[#F8FAFC]";
 
 const cardBg = darkMode ? "bg-[#101B29]" : "bg-white";

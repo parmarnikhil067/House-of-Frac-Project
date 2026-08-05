@@ -85,7 +85,6 @@ const inactiveTab = darkMode
 
  const email = formValues.email || "";
 const mobileNumber = formValues.mobile?.number || "";
-const mobileCode = formValues.mobile?.code || "+91";
 const password = formValues.password || "";
 
 const isEmailValid =

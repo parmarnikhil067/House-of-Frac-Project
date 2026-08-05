@@ -66,7 +66,6 @@ const backColor = requirementColor;
 
   const {
     register,
-    handleSubmit,
     watch,
     formState: { errors },
   } = useForm<FormData>({

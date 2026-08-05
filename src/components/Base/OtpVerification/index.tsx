@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import { CheckCircle2, X, ArrowRight } from "lucide-react";
@@ -9,7 +9,6 @@ import signupBg from "@/assets/auth-bg-light.png";
 import benefitsImage from "@/assets/signup-hero-dark.png";
 
 const VerifyDetails = () => {
-  const navigate = useNavigate();
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const { darkMode } = useTheme();
 

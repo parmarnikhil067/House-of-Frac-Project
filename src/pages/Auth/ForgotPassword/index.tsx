@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Mail, Phone } from "lucide-react";
 import benefitsImage from "@/assets/signup-hero-dark.png";
@@ -7,12 +7,11 @@ import bgImage from "@/assets/auth-bg-light.png";
 import { useTheme } from "@/context/ThemeContext";
 
 const ForgotPassword: React.FC = () => {
-  const navigate = useNavigate();
 
   const [method, setMethod] = useState<"email" | "phone">("email");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const { darkMode } = useTheme();
 
 const pageBg = darkMode ? "bg-[#122238]" : "bg-[#F4F7FB]";

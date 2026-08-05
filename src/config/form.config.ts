@@ -100,7 +100,6 @@ export const loginFormConfig: IFieldConfig[] = [
    createMobileField({
   name: "mobile",
   label: "Mobile",
-  type: "mobile",
   placeholder: "Enter Your Mobile Number",
   validation: {
     required: "Mobile number is required",

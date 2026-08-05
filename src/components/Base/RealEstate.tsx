@@ -2,6 +2,11 @@ import { motion, useInView, animate } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useTheme } from "@/context/ThemeContext";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/pagination";
 
 
 function CountUp({
@@ -192,6 +197,7 @@ const RealEstate = () => {
             by clear legal documentation.
           </p>
         </div>
+
 
       <div
   className="

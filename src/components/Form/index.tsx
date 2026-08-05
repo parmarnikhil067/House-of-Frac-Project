@@ -4,42 +4,46 @@ import {
   type FieldValues,
   type SubmitHandler,
 } from 'react-hook-form';
+import { useEffect } from "react";
 import type { IFieldConfig, IFormDatepickerConfig } from '@/interface';
 import FormSelect from '@/components/Form/FormSelect';
 import FormInput from '@/components/Form/FormInput';
 import FormTextarea from '@/components/Form/FormTextarea';
 import FormCheckbox from '@/components/Form/FormCheckbox';
 import FormRadio from '@/components/Form/FormRadio';
-import CustomButton, {
-  type ICustomButtonProps,
-} from '@/components/Base/CustomButton';
 import FormDatepicker from './FormDatePicker';
 import FormMobile from './FormMobile';
 
 interface IFormProps {
   fields: IFieldConfig[];
   onSubmit: SubmitHandler<FieldValues>;
-  width?: 'max-w-md';
-  button?: {
-    variant?: ICustomButtonProps['variant'];
-    label?: string;
-  };
+  width?: "max-w-md";
+  onValuesChange?: (values: FieldValues) => void;
+  formId?: string;
 }
 
 export default function Form({
   fields,
   onSubmit,
   width = 'max-w-md',
-  button = {
-    variant: 'primary',
-    label: 'Submit',
-  },
+   onValuesChange,
+     formId,
 }: IFormProps) {
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+ const {
+  control,
+  handleSubmit,
+  watch,
+  formState: { errors },
+} = useForm({
+  mode: "onChange",
+  reValidateMode: "onChange",
+});
+
+ const values = watch();
+
+useEffect(() => {
+  onValuesChange?.({ ...values });
+}, [JSON.stringify(values)]);
 
   const renderField = (field: IFieldConfig) => {
     switch (field.type) {
@@ -96,8 +100,8 @@ export default function Form({
             key={field.name}
             field={field}
             control={control}
-            error={errors[field.name] as FieldError}
-          />
+            error={errors}            
+            />
         );
       default:
         return (
@@ -112,19 +116,12 @@ export default function Form({
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className={`${width} mx-auto bg-white shadow-md rounded-xl p-6`}
-    >
-      {fields.map(renderField)}
-
-      <CustomButton
-        type="submit"
-        variant={button['variant']}
-        className="w-full"
-      >
-        {button['label']}
-      </CustomButton>
-    </form>
+   <form
+  id={formId}
+  onSubmit={handleSubmit(onSubmit)}
+  className={`${width} mx-auto`}
+>
+  {fields.map(renderField)}
+</form>
   );
 }

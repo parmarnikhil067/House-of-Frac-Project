@@ -85,13 +85,76 @@ export const signupFormConfig: IFieldConfig[] = [
 
 export const loginFormConfig: IFieldConfig[] = [
   createEmailField({
-    name: 'email',
-    label: 'Email',
-    placeholder: 'Enter Email',
+    name: "email",
+    label: "Email",
+    placeholder: "Enter Email",
+    validation: {
+      required: "Email is required",
+      pattern: {
+        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+        message: "Please enter a valid email address",
+      },
+    },
   }),
+
+   createMobileField({
+  name: "mobile",
+  label: "Mobile",
+  type: "mobile",
+  placeholder: "Enter Your Mobile Number",
+  validation: {
+    required: "Mobile number is required",
+    pattern: {
+      value: /^[6-9]\d{9}$/,
+      message: "Please enter a valid 10-digit phone number",
+    },
+  },
+}),
+
   createPasswordField({
-    name: 'password',
-    label: 'Password',
-    placeholder: 'Enter password',
+    name: "password",
+    label: "Password",
+    placeholder: "Enter Password",
+    validation: {
+      required: "Password is required",
+      pattern: {
+        value:
+          /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&^#()_\-+=])[A-Za-z\d@$!%*?&^#()_\-+=]{8,}$/,
+        message:
+          "Password must contain at least 8 characters, 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character.",
+      },
+    },
+  }),
+];
+
+/*
+  Login Form Config
+*/
+
+export const forgotPasswordConfig = [
+  createEmailField({
+    name: "email",
+    label: "Email Address",
+    placeholder: "Enter Your Email",
+    validation: {
+      required: "Email is required",
+      pattern: {
+        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+        message: "Please enter a valid email",
+      },
+    },
+  }),
+
+  createMobileField({
+    name: "mobile",
+    label: "Mobile Number",
+    placeholder: "Enter Mobile Number",
+    validation: {
+      required: "Phone number is required",
+      pattern: {
+        value: /^[6-9]\d{9}$/,
+        message: "Please enter a valid phone number",
+      },
+    },
   }),
 ];

@@ -8,7 +8,7 @@ import phoneTwo from "@/assets/phone-right.webp";
 
 const CollaborateSection = () => {
   return (
-    <section className="relative overflow-hidden bg-[#071728]">
+    <section className="relative overflow-hidden bg-[#071728] px-5 py-2">
       {/* Main Container */}
 
       <div

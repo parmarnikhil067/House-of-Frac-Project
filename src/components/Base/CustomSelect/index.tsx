@@ -1,4 +1,6 @@
+import { ChevronDown } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
+import {useTheme} from "@/context/ThemeContext";
 
 interface ICustomSelectProps {
   value: string | string[];
@@ -32,6 +34,9 @@ export default function CustomSelect({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [onBlur]);
 
+  console.log("Value:", value);
+console.log("Options:", options);
+
   const isSelected = (val: string) =>
     isMulti ? Array.isArray(value) && value.includes(val) : value === val;
 
@@ -49,6 +54,38 @@ export default function CustomSelect({
     }
   };
 
+const { darkMode } = useTheme();
+
+const selectBg = darkMode ? "bg-[#1C2835]" : "bg-white";
+
+const selectText = darkMode
+  ? "text-white"
+  : "text-[#0F172A]";
+
+const borderColor = darkMode
+  ? "border-[#334252]"
+  : "border-[#D8E1EC]";
+
+const hoverBg = darkMode
+  ? "hover:bg-[#2B3C52]"
+  : "hover:bg-[#F1F5F9]";
+
+const selectedBg = darkMode
+  ? "bg-[#2B3C52]"
+  : "bg-[#E0F2FE]";
+
+const selectedText = darkMode
+  ? "text-white"
+  : "text-[#0F172A]";
+
+const optionText = darkMode
+  ? "text-[#D5D9E0]"
+  : "text-[#475569]";
+
+const iconColor = darkMode
+  ? "text-white"
+  : "text-[#0F172A]";
+
   const selectedLabels = isMulti
     ? options
         .filter((opt) => Array.isArray(value) && value.includes(opt.value))
@@ -56,28 +93,93 @@ export default function CustomSelect({
         .join(', ')
     : options.find((opt) => opt.value === value)?.label || placeholder;
 
+
+    console.log("OPTIONS:", options);
   return (
-    <div className="relative w-full" ref={ref}>
-      <button
-        type="button"
-        onClick={() => setOpen(!open)}
-        className="w-full p-2 border rounded-lg border-gray-300 bg-white text-left text-base focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400"
-      >
-        {selectedLabels || placeholder}
-      </button>
+<div
+  className="relative w-full overflow-visible"
+  ref={ref}
+>     <button
+  type="button"
+  onClick={() => setOpen(!open)}
+  className={`
+    w-full
+    h-full
+    px-4
+    flex
+    items-center
+    justify-between
+    ${selectBg}
+    ${selectText}
+    border-0
+    rounded-none
+    text-base
+    lg:text-lg
+    transition-all
+    focus:outline-none
+  `}
+>
+  <span className={`${selectText} truncate`}>
+    {selectedLabels || "+91"}
+  </span>
+
+  <ChevronDown
+    className={`
+      w-5
+      h-5
+      ${iconColor}
+      transition-transform
+      ${open ? "rotate-180" : ""}
+    `}
+  />
+</button>
 
       {open && (
-        <div className="absolute z-10 mt-1 w-full bg-white border rounded-md shadow-lg max-h-60 overflow-auto">
-          {options.map((opt) => (
-            <div
+<div
+  className={`
+  absolute
+  z-50
+  mt-2
+  w-full
+  overflow-hidden
+  rounded-xl
+
+  ${selectBg}
+
+  border
+  ${borderColor}
+
+  shadow-xl
+
+  max-h-60
+  overflow-y-auto
+`}
+>          {options.map((opt) => (
+  <button
               key={opt.value}
+              type="button"
               onClick={() => handleSelect(opt.value)}
-              className={`p-2 text-sm cursor-pointer hover:bg-blue-50 ${
-                isSelected(opt.value) ? 'bg-blue-100 font-semibold' : ''
-              }`}
+              className={`
+  w-full
+  px-4
+  py-3
+
+  text-left
+
+  text-sm
+  sm:text-base
+
+  transition-colors
+
+  ${
+    isSelected(opt.value)
+      ? `${selectedBg} ${selectedText}`
+      : `${optionText} ${hoverBg}`
+  }
+`}
             >
               {opt.label}
-            </div>
+            </button>
           ))}
         </div>
       )}

@@ -22,6 +22,14 @@ const TermsAndCondition = lazy(() => import('./Public/TermsAndCondition'));
 const ContactUs = lazy(() => import('./Public/ContactUs'));
 const Users = lazy(() => import('./Private/Users'));
 const Home = lazy(() => import('./Public/Home'));
+const CreateAccount = lazy(() => import('./Auth/CreateAccount'));
+const CountrySection = lazy(() => import('../components/Base/CountrySection'));
+const CreatePassword = lazy(() => import('../components/Base/CreatePassword'));
+const CreateSignPassword = lazy(() => import('../components/Base/CreateSignPassword'));
+const VerifyDetails = lazy(() => import('../components/Base/OtpVerification'));
+
+
+
 
 
 export default function Pages() {
@@ -47,6 +55,12 @@ export default function Pages() {
           <Route path={ROUTES.LOGIN} element={<Login />} />
           <Route path={ROUTES.SIGNUP} element={<Signup />} />
           <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPassword />} />
+          <Route path={ROUTES.CREATE_ACCOUNT} element={<CreateAccount/>} />
+          <Route path={ROUTES.COUNTRYSECTION} element={<CountrySection />} />
+          <Route path={ROUTES.CREATE_PASSWORD} element={<CreatePassword />} />
+          <Route path={ROUTES.CREATE_SIGN_PASSWORD} element={<CreateSignPassword />} />
+          <Route path={ROUTES.VERIFY_DETAILS} element={<VerifyDetails />} />
+
         </Route>
 
         {/* Private Routes */}

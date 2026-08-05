@@ -33,7 +33,7 @@ const chips = [
 export default function ExploreSection() {
   const {darkMode} = useTheme();
   return (
-    <section className={`relative overflow-hidden ${
+    <section className={`relative overflow-hidden py-2 ${
       darkMode
         ? "bg-[#090909]"
         : "bg-[#F7F8FC]"

@@ -2,13 +2,11 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTheme } from "@/context/ThemeContext";
-import { useNavigate } from "react-router-dom";
 import logo from "@/assets/Logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 const { darkMode, toggleTheme } = useTheme();
-const navigate = useNavigate();
 
   const navItems = [
     { name: "How it works", href: "#" },
@@ -37,10 +35,10 @@ const navigate = useNavigate();
     border-b
   `}
 >
-  <div className="mx-auto max-w-[1440px] h-[72px] lg:h-[90px] flex items-center justify-between px-2 sm:px-2 lg:px-3 xl:px-2">
+  <div className="mx-auto h-[72px] lg:h-[90px] flex items-center justify-between px-4 sm:px-4 lg:px-6 xl:px-8">
 
         {/* Left */}
-        <div className="flex items-center">
+        <div className="flex items-center  max-w-[1440px]">
 
           {/* Logo */}
           <Link to="/" className="flex items-center gap-1">
@@ -75,9 +73,9 @@ const navigate = useNavigate();
           {/* Navigation */}
          <nav className="hidden lg:flex items-center ml-16 xl:ml-20 gap-10 xl:gap-14">
   {navItems.map((item) => (
-    <a
+    <Link
   key={item.name}
-  href={item.href}
+  to={item.href}
   className={`
     relative
     inline-block
@@ -104,7 +102,7 @@ const navigate = useNavigate();
   `}
 >
   {item.name}
-</a>
+</Link>
   ))}
 </nav>
 
@@ -131,6 +129,7 @@ const navigate = useNavigate();
 
     transition-all
     duration-500
+    cursor-pointer
   "
 >
   {darkMode ? (
@@ -166,45 +165,61 @@ const navigate = useNavigate();
   )}
 </button>
           {/* Login */}
-          <button
-           className={`
-  h-14
-  px-10
-  rounded-2xl
-  border
-  font-semibold
-  text-lg
-  transition-all
-  duration-300
+         <Link
+  to="/login"
+  className={`
+    inline-flex
+    items-center
+    justify-center
 
-  ${
-    darkMode
-      ? "border-white/20 text-white hover:border-[#5B9CF3]"
-      : "border-gray-300 text-[#111827] hover:border-[#4178CB]"
-  }
-`}
-          >
-            Login
-          </button>
-
-          {/* Get Started */}
-          <button
-  onClick={() => navigate("/signup")}
-  className="
     h-14
     px-10
+
     rounded-2xl
+    border
+
+    font-semibold
+    text-lg
+
+    transition-all
+    duration-300
+
+    ${
+      darkMode
+        ? "border-white/20 text-white hover:border-[#5B9CF3] hover:text-[#4178CB]"
+        : "border-gray-300 text-[#111827] hover:border-[#4178CB] hover:text-[#4178CB]"
+    }
+  `}
+>
+  Login
+</Link>
+
+
+         <Link
+  to="/signup"
+  className="
+    inline-flex
+    items-center
+    justify-center
+
+    h-14
+    px-10
+
+    rounded-2xl
+
     bg-[#5B9BF3]
     hover:bg-[#4b8ae2]
+
     text-white
     font-bold
     text-lg
+
     transition
     duration-300
   "
 >
   Get Started
-</button>
+</Link>
 
         </div>
 
@@ -243,9 +258,9 @@ className={darkMode ? "text-white" : "text-[#111827]"}    />
           <div className="px-6 py-6 space-y-5">
 
             {navItems.map((item) => (
-             <a
+             <Link
   key={item.name}
-  href={item.href}
+  to={item.href}
   className={`block text-lg font-medium transition-colors duration-300 ${
     darkMode
       ? "text-white"
@@ -254,7 +269,7 @@ className={darkMode ? "text-white" : "text-[#111827]"}    />
   onClick={() => setIsOpen(false)}
 >
   {item.name}
-</a>
+</Link>
             ))}
 <button
   onClick={toggleTheme}
@@ -275,7 +290,6 @@ className={darkMode ? "text-white" : "text-[#111827]"}    />
       >
         <path d="M21.75 15.5A9.75 9.75 0 0110.5 2.25a8 8 0 1011.25 13.25z" />
       </svg>
-      <span>Light Mode</span>
     </>
   ) : (
     <>
@@ -298,24 +312,24 @@ className={darkMode ? "text-white" : "text-[#111827]"}    />
           <line x1="4.2" y1="19.8" x2="6.3" y2="17.7" />
         </g>
       </svg>
-      <span>Dark Mode</span>
     </>
   )}
 </button>
-           <button
-  className={`w-full h-12 rounded-xl border font-semibold transition-all duration-300 ${
+           <Link
+  to="/login"
+  onClick={() => setIsOpen(false)}
+  className={`w-full h-12 rounded-xl border font-semibold transition-all duration-300 flex items-center justify-center ${
     darkMode
       ? "border-white/20 text-white hover:border-[#5B9BF3]"
       : "border-gray-300 text-[#111827] hover:border-[#5B9BF3]"
   }`}
 >
   Login
-</button>
-            <button
-  onClick={() => {
-    navigate("/signup");
-    setIsOpen(false);
-  }}
+</Link>
+
+<Link
+  to="/signup"
+  onClick={() => setIsOpen(false)}
   className="
     w-full
     h-12
@@ -326,10 +340,13 @@ className={darkMode ? "text-white" : "text-[#111827]"}    />
     transition
     duration-300
     hover:bg-[#4b8ae2]
+    flex
+    items-center
+    justify-center
   "
 >
   Get Started
-</button>
+</Link>
 
           </div>
 

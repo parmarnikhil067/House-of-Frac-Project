@@ -24,7 +24,7 @@ const fadeUp : Variants = {
 export default function WhatWeDoSection() {
   const {darkMode} = useTheme();
   return (
-    <section className={`w-full  overflow-hidden   ${
+    <section className={`w-full overflow-hidden px-5 py-2   ${
       darkMode
         ? "bg-[#090909]"
         : "bg-[#F7F8FC]"
@@ -439,7 +439,7 @@ ${darkMode ? "text-white" : "text-black"}
       duration: 0.8,
       ease: "easeOut",
     }}
-    className="w-full translate-x-[-40px]"
+    className="w-full  translate-x-[-5px] lg:translate-x-[-40px]"
   >
     {/* Number */}
 

@@ -1,4 +1,5 @@
 import logo from "@/assets/Logo.png";
+import {Link} from "react-router-dom"
 
 import {
   FaFacebookF,
@@ -20,7 +21,11 @@ export default function Footer() {
           mx-auto
           max-w-[1600px]
 
-          px-1
+          px-4
+          sm:px-2
+          md:px-4
+          lg:px-5
+          xl:px-0
 
           pt-10
           sm:pt-10
@@ -58,21 +63,27 @@ export default function Footer() {
                 src={logo}
                 alt="logo"
                 className="
-                  h-14
-                  w-14
+                  h-10
+                  w-10
 
-                  sm:h-16
-                  sm:w-16
-                "
+                  md:h-12
+                  md:w-12
+                  lg:h-14
+                  lg:w-14
+                  xl:h-14
+                  xl:w-14
+                  "
               />
 
               <h2
                 className="
                   font-bold
 
-                  text-[26px]
-                  sm:text-[32px]
-                  lg:text-[40px]
+                  text-[24px]
+                  sm:text-[24px]
+                  md:text-[24px]
+                  lg:text-[30px]
+                  xl:text-[40px]
                 "
               >
                 OUSE OF FRAC
@@ -112,7 +123,7 @@ export default function Footer() {
                 <FaFacebookF />,
               ].map((icon, index) => (
 
-                <div
+                <Link
                   key={index}
                   className="
                     flex
@@ -137,7 +148,7 @@ export default function Footer() {
                   "
                 >
                   {icon}
-                </div>
+                </Link>
 
               ))}
 
@@ -275,7 +286,7 @@ export default function Footer() {
 
           absolute
           
-          bottom-[2%]
+          bottom-[1%]
           left-1/2
 
           -translate-x-1/2

@@ -1,4 +1,3 @@
-import { BrowserRouter } from "react-router-dom";
 import React, { useEffect } from "react";
 import Pages from "./pages";
 import { useThemeStore } from "./stores";
@@ -13,9 +12,7 @@ function App() {
 
   return (
     <React.Fragment>
-      <BrowserRouter>
         <Pages />
-      </BrowserRouter>
     </React.Fragment>
   );
 }

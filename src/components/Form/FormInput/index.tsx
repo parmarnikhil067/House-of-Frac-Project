@@ -19,6 +19,7 @@ export default function FormInput({ field, control, error }: IFormInputProps) {
       <Controller
         name={field.name}
         control={control}
+        defaultValue=""
         rules={field.validation}
         render={({ field: controllerField }) => (
           <CustomInput
@@ -26,6 +27,7 @@ export default function FormInput({ field, control, error }: IFormInputProps) {
             type={field.type}
             value={controllerField.value || ''}
             onChange={controllerField.onChange}
+            onBlur={controllerField.onBlur}
             placeholder={field.placeholder}
             error={error?.message}
           />

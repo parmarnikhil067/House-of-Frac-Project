@@ -1,6 +1,5 @@
 import {
   useForm,
-  type FieldError,
   type FieldValues,
   type SubmitHandler,
 } from 'react-hook-form';
@@ -33,11 +32,6 @@ const {
   control,
   handleSubmit,
   watch,
-  formState: {
-    errors,
-    touchedFields,
-    isValid,
-  },
 } = useForm({
   mode: "onChange",
   reValidateMode: "onChange",

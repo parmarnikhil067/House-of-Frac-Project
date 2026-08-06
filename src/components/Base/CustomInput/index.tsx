@@ -24,7 +24,6 @@ export default function CustomInput({
   placeholder,
   error,
   noBorder = false,
-  hideError = false,
   touched = false,
 }: CustomInputProps) {
   const [showPassword, setShowPassword] = useState(false);

@@ -1,37 +1,38 @@
 import {
   Controller,
   type Control,
-  type FieldError,
   type FieldValues,
-} from 'react-hook-form';
-import type { IFormTextareaConfig } from '@/interface';
-import CustomTextarea from '@/components/Base/CustomTextarea';
+} from "react-hook-form";
+
+import type { IFormTextareaConfig } from "@/interface";
+import CustomTextarea from "@/components/Base/CustomTextarea";
 
 interface IFormTextareaProps {
   field: IFormTextareaConfig;
   control: Control<FieldValues>;
-  error?: FieldError;
 }
 
 export default function FormTextarea({
   field,
   control,
-  error,
 }: IFormTextareaProps) {
   return (
     <div className="mb-4">
       <Controller
         name={field.name}
         control={control}
+        defaultValue=""
         rules={field.validation}
-        render={({ field: controllerField }) => (
+        render={({ field: controllerField, fieldState }) => (
           <CustomTextarea
             label={field.label}
-            value={controllerField.value || ''}
+            value={controllerField.value || ""}
             onChange={controllerField.onChange}
+            onBlur={controllerField.onBlur}
             placeholder={field.placeholder}
             rows={field.rows}
-            error={error?.message}
+            touched={fieldState.isTouched}
+            error={fieldState.error?.message}
           />
         )}
       />

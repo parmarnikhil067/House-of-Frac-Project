@@ -1,7 +1,6 @@
 import {
   Controller,
   type Control,
-  type FieldError,
   type FieldValues,
 } from 'react-hook-form';
 import type { IFormInputConfig } from '../../../interface';
@@ -10,10 +9,9 @@ import CustomInput from '@/components/Base/CustomInput';
 type IFormInputProps = {
   field: IFormInputConfig;
   control: Control<FieldValues>;
-  error?: FieldError;
 };
 
-export default function FormInput({ field, control, error }: IFormInputProps) {
+export default function FormInput({ field, control}: IFormInputProps) {
   return (
     <div className="mb-4">
       <Controller
@@ -21,16 +19,17 @@ export default function FormInput({ field, control, error }: IFormInputProps) {
         control={control}
         defaultValue=""
         rules={field.validation}
-        render={({ field: controllerField }) => (
-          <CustomInput
+render={({ field: controllerField, fieldState }) => (
+            <CustomInput
             label={field.label}
             type={field.type}
             value={controllerField.value || ''}
             onChange={controllerField.onChange}
             onBlur={controllerField.onBlur}
             placeholder={field.placeholder}
-            error={error?.message}
-          />
+            touched={fieldState.isTouched}
+  error={fieldState.error?.message}
+            />
         )}
       />
     </div>

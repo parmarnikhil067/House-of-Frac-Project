@@ -12,6 +12,7 @@ interface CustomInputProps {
   error?: string;
   noBorder?: boolean;
   hideError?: boolean; 
+   touched?: boolean;
 }
 
 export default function CustomInput({
@@ -24,9 +25,11 @@ export default function CustomInput({
   error,
   noBorder = false,
   hideError = false,
+  touched = false,
 }: CustomInputProps) {
   const [showPassword, setShowPassword] = useState(false);
   const { darkMode } = useTheme();
+  const showError = touched && !!error;
 
 const labelColor = darkMode ? "text-white" : "text-[#0F172A]";
 
@@ -118,13 +121,13 @@ const iconColor = darkMode
                 : inputBg
             }
 
-            ${
-              noBorder
-                ? "border-0 rounded-none focus:ring-0 focus:border-transparent"
-                :error
-  ? "border border-red-500 rounded-2xl focus:ring-2 focus:ring-red-500/20"
-  : `border ${borderColor} rounded-2xl focus:ring-2 ${focusBorder}`
-            }
+       ${
+  noBorder
+    ? "border-0 rounded-none"
+    : showError
+    ? "border border-red-500 rounded-2xl focus:ring-2 focus:ring-red-500/20"
+    : `border ${borderColor} rounded-2xl focus:ring-2 ${focusBorder}`
+}
 
             outline-none
 
@@ -167,8 +170,8 @@ ${iconColor}
         )}
       </div>
 
-      {!hideError && error && (
-  <p className="mt-2 text-sm text-red-400">
+{showError && (
+  <p className="mt-2 text-sm text-red-500">
     {error}
   </p>
 )}

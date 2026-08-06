@@ -36,6 +36,13 @@ useEffect(() => {
   validate();
 }, [firstName, lastName, email, mobile]);
 
+const [touched, setTouched] = useState({
+  firstName: false,
+  lastName: false,
+  email: false,
+  mobile: false,
+});
+
 const isFormValid =
   firstName.trim() !== "" &&
   lastName.trim() !== "" &&
@@ -64,6 +71,7 @@ const validate = () => {
   let valid = true;
 
   // First Name
+ if (touched.firstName) {
   if (!firstName.trim()) {
     newErrors.firstName = "First name is required";
     valid = false;
@@ -71,6 +79,7 @@ const validate = () => {
     newErrors.firstName = "Only letters are allowed";
     valid = false;
   }
+}
 
   // Last Name
   if (!lastName.trim()) {
@@ -344,7 +353,16 @@ ${text}
 <input
   type="text"
   value={firstName}
-  onChange={(e) => setFirstName(e.target.value)}
+  onChange={(e) => {
+    setFirstName(e.target.value);
+  }}
+  onBlur={() => {
+    setTouched((prev) => ({
+      ...prev,
+      firstName: true,
+    }));
+    validate();
+  }}
   className={`
     w-full
     h-[54px]
@@ -356,18 +374,18 @@ ${text}
     border
     transition-all
     ${
-      errors.firstName
-        ? "border-red-500"
-        : `${inputBorder} focus:border-[#5B9BF3]`
-    }
-  `}
+  touched.firstName && errors.firstName
+    ? "border-red-500"
+    : `${inputBorder} focus:border-[#5B9BF3]`
+}
+`}
 />
 
 
-{errors.firstName && (
-  <p className="mt-2 text-sm text-red-500">
-    {errors.firstName}
-  </p>
+{touched.firstName && errors.firstName && (
+<p className="mt-2 text-sm text-red-500">
+  {errors.firstName}
+</p>
 )}
   </div>
 
@@ -381,7 +399,16 @@ ${text}
 <input
   type="text"
   value={lastName}
-  onChange={(e) => setLastName(e.target.value)}
+  onChange={(e) => {
+    setLastName(e.target.value);
+  }}
+  onBlur={() => {
+    setTouched((prev) => ({
+      ...prev,
+      lastName: true,
+    }));
+    validate();
+  }}
   className={`
     w-full
     h-[54px]
@@ -393,14 +420,14 @@ ${text}
     border
     transition-all
     ${
-      errors.lastName
+touched.lastName && errors.lastName
         ? "border-red-500"
         : `${inputBorder} focus:border-[#5B9BF3]`
     }
   `}
 />
 
-{errors.lastName && (
+{touched.lastName && errors.lastName && (
   <p className="mt-2 text-sm text-red-500">
     {errors.lastName}
   </p>
@@ -417,7 +444,16 @@ ${text}
 <input
   type="email"
   value={email}
-  onChange={(e) => setEmail(e.target.value)}
+  onChange={(e) => {
+    setEmail(e.target.value);
+  }}
+  onBlur={() => {
+    setTouched((prev) => ({
+      ...prev,
+      email: true,
+    }));
+    validate();
+  }}
   className={`
     w-full
     h-[54px]
@@ -429,14 +465,14 @@ ${text}
     border
     transition-all
     ${
-      errors.email
+touched.email && errors.email
         ? "border-red-500"
         : `${inputBorder} focus:border-[#5B9BF3]`
     }
   `}
 />
 
-{errors.email && (
+{touched.email && errors.email && (
   <p className="mt-2 text-sm text-red-500">
     {errors.email}
   </p>
@@ -465,7 +501,7 @@ ${text}
       ${inputBg}
       border
       ${
-        errors.mobile
+touched.mobile && errors.mobile
           ? "border-red-500"
           : `${inputBorder} focus-within:border-[#5B9BF3]`
       }
@@ -488,18 +524,25 @@ ${text}
     </div>
 
     <input
-      type="tel"
-      value={mobile}
-      maxLength={10}
-      onChange={(e) => {
-        const value = e.target.value.replace(/\D/g, "");
-        setMobile(value);
-      }}
-      className={`flex-1 h-full bg-transparent px-5 ${inputText} outline-none`}
-    />
+  type="tel"
+  value={mobile}
+  maxLength={10}
+  onChange={(e) => {
+    const value = e.target.value.replace(/\D/g, "");
+    setMobile(value);
+  }}
+  onBlur={() => {
+    setTouched((prev) => ({
+      ...prev,
+      mobile: true,
+    }));
+    validate();
+  }}
+  className={`flex-1 h-full bg-transparent px-5 ${inputText} outline-none`}
+/>
   </div>
 
-  {errors.mobile && (
+  {touched.mobile && errors.mobile && (
     <p className="mt-2 text-sm text-red-500">
       {errors.mobile}
     </p>
@@ -514,11 +557,9 @@ ${text}
   <button
   type="button"
   disabled={!isFormValid}
-  onClick={() => {
-    if (validate()) {
-      navigate("/create-sign-password");
-    }
-  }}
+ onClick={() => {
+  navigate("/create-sign-password");
+}}
   className={`
     mt-2
     w-full

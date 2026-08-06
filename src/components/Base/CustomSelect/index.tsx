@@ -10,6 +10,8 @@ interface ICustomSelectProps {
   placeholder?: string;
   className?: string;
   isMulti?: boolean;
+  touched?: boolean;
+error?: string;
 }
 
 export default function CustomSelect({
@@ -19,6 +21,8 @@ export default function CustomSelect({
   options,
   placeholder,
   isMulti,
+  touched = false,
+error,
 }: ICustomSelectProps) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -137,23 +141,33 @@ const iconColor = darkMode
       {open && (
 <div
   className={`
-  absolute
-  z-50
-  mt-2
   w-full
-  overflow-hidden
-  rounded-xl
-
+  h-full
+  px-4
+  flex
+  items-center
+  justify-between
   ${selectBg}
+  ${selectText}
 
-  border
-  ${borderColor}
+  ${
+    touched && error
+      ? "border border-red-500 rounded-2xl"
+      : `border ${borderColor} rounded-2xl`
+  }
 
-  shadow-xl
+  text-base
+  lg:text-lg
+  transition-all
+  focus:outline-none
 
-  max-h-60
-  overflow-y-auto
+  ${
+    touched && error
+      ? "ring-2 ring-red-500/20"
+      : "focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+  }
 `}
+
 >          {options.map((opt) => (
   <button
               key={opt.value}
@@ -183,6 +197,12 @@ const iconColor = darkMode
           ))}
         </div>
       )}
+
+      {touched && error && (
+  <p className="mt-2 text-sm text-red-500">
+    {error}
+  </p>
+)}
     </div>
   );
 }

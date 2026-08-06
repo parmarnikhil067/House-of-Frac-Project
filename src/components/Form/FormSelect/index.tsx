@@ -1,47 +1,51 @@
 import {
   Controller,
   type Control,
-  type FieldError,
   type FieldValues,
-} from 'react-hook-form';
-import type { IFormSelectConfig } from '@/interface';
-import CustomSelect from '@/components/Base/CustomSelect';
+} from "react-hook-form";
+
+import type { IFormSelectConfig } from "@/interface";
+import CustomSelect from "@/components/Base/CustomSelect";
 
 interface IFormSelectProps {
   field: IFormSelectConfig;
   control: Control<FieldValues>;
-  error?: FieldError;
 }
 
 export default function FormSelect({
   field,
   control,
-  error,
 }: IFormSelectProps) {
   return (
     <div className="mb-4">
-      <label className="block text-sm font-medium mb-1">{field.label}</label>
+      <label className="block mb-2 text-sm font-medium">
+        {field.label}
+      </label>
 
       <Controller
         name={field.name}
         control={control}
+        defaultValue={field.multiple ? [] : ""}
         rules={field.validation}
-        render={({ field: controllerField }) => (
-          <CustomSelect
-            {...controllerField}
-            options={field.options}
-            placeholder={`Select ${field.label}`}
-            isMulti={field.multiple}
-            className={`w-full p-2 border rounded-lg bg-white focus:outline-none focus:ring-2 ${
-              error
-                ? 'border-red-500 focus:ring-red-400'
-                : 'border-gray-300 focus:ring-blue-400'
-            }`}
-          />
+        render={({ field: controllerField, fieldState }) => (
+          <>
+            <CustomSelect
+              {...controllerField}
+              options={field.options}
+              placeholder={`Select ${field.label}`}
+              isMulti={field.multiple}
+              touched={fieldState.isTouched}
+              error={fieldState.error?.message}
+            />
+
+            {fieldState.isTouched && fieldState.error && (
+              <p className="mt-2 text-sm text-red-500">
+                {fieldState.error.message}
+              </p>
+            )}
+          </>
         )}
       />
-
-      {error && <p className="text-red-500 text-sm mt-1">{error.message}</p>}
     </div>
   );
 }

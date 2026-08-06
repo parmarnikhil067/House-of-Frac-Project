@@ -30,7 +30,10 @@ export default function FormMobile({
 }: IFormMobileProps) {
 
   const {
-  fieldState: { error: mobileError },
+  fieldState: {
+    error: mobileError,
+    isTouched,
+  },
 } = useController({
   name: `${field.name}.number`,
   control,
@@ -84,10 +87,10 @@ const labelColor = darkMode
   focus-within:ring-[#5B9BF3]/20
   transition-all
  ${
-    mobileError
-      ? "border border-red-500"
-      : "border border-[#334252] focus-within:border-[#5B9BF3]"
-  }
+  isTouched && mobileError
+    ? "border border-red-500"
+    : `${wrapperBorder} focus-within:border-[#5B9BF3]`
+}
 `}
 >        <div className="w-[110px] shrink-0">
   <Controller
@@ -122,7 +125,8 @@ const labelColor = darkMode
         onChange={controllerField.onChange}
         onBlur={controllerField.onBlur}
         placeholder={field.placeholder}
-         error={fieldState.error?.message}
+error={fieldState.error?.message}
+touched={fieldState.isTouched}
         noBorder
           hideError 
       />
@@ -134,7 +138,7 @@ const labelColor = darkMode
       </div>
 
        {/*  Validation */}
-  {mobileError && (
+{isTouched && mobileError && (
   <p className="mt-2 text-sm text-red-500">
     {mobileError.message}
   </p>

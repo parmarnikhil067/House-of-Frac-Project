@@ -29,11 +29,15 @@ export default function Form({
    onValuesChange,
      formId,
 }: IFormProps) {
- const {
+const {
   control,
   handleSubmit,
   watch,
-  formState: { errors },
+  formState: {
+    errors,
+    touchedFields,
+    isValid,
+  },
 } = useForm({
   mode: "onChange",
   reValidateMode: "onChange",
@@ -53,7 +57,6 @@ useEffect(() => {
             key={field.name}
             field={field}
             control={control}
-            error={errors[field.name] as FieldError}
           />
         );
       case 'textarea':
@@ -62,7 +65,6 @@ useEffect(() => {
             key={field.name}
             field={field}
             control={control}
-            error={errors[field.name] as FieldError}
           />
         );
       case 'checkbox':
@@ -71,7 +73,6 @@ useEffect(() => {
             key={field.name}
             field={field}
             control={control}
-            error={errors[field.name] as FieldError}
           />
         );
       case 'radio':
@@ -80,7 +81,6 @@ useEffect(() => {
             key={field.name}
             field={field}
             control={control}
-            error={errors[field.name] as FieldError}
           />
         );
       case 'datepicker': {
@@ -90,7 +90,6 @@ useEffect(() => {
             key={datepickerField.name}
             field={datepickerField}
             control={control}
-            error={errors[datepickerField.name] as FieldError}
           />
         );
       }
@@ -100,7 +99,6 @@ useEffect(() => {
             key={field.name}
             field={field}
             control={control}
-            error={errors}            
             />
         );
       default:
@@ -109,7 +107,6 @@ useEffect(() => {
             key={field.name}
             field={field}
             control={control}
-            error={errors[field.name] as FieldError}
           />
         );
     }
